@@ -19,13 +19,13 @@
     // get the price here
     var price = $listToRemove.children(".price").text();
     var qty = $listToRemove.children(".qty").text();
-    
+
     total = total - (price * qty);
     total = Math.round(total * 100)/100;
 
     $('.total').text("Total: " + total);
 
-    $listToRemove.remove();  
+    $listToRemove.remove();
   }
 
   function buyStock () {
@@ -62,24 +62,24 @@
 
     var stocks = [];
 
-    var $ul = $('<ul></ul>');
+    var $tr = $('<tr></tr>');
 
     //making the list items and appending to $ul
-    var $liName = $('<li>' + name + '</li>');
-    var $liLastPrice = $('<li class="price">' + lastPrice + '</li>');
-    var $liQty = $('<li class="qty">' + $qty + '</li>');
-    var $liChange = $('<li>' + change + '</li>');
-    var $liChangePercent = $('<li>' + changePercent + '</li>');
-    var $liRemove = $('<li><button class="remove">Remove</button></li>');
-    $ul.append($liName);
-    $ul.append($liLastPrice);
-    $ul.append($liQty);
-    $ul.append($liChange);
-    $ul.append($liChangePercent);
-    $ul.append($liRemove);
+    var $tdName = $('<td>' + name + '</td>');
+    var $tdLastPrice = $('<td class="price">' + lastPrice + '</td>');
+    var $tdQty = $('<td class="qty">' + $qty + '</td>');
+    var $tdChange = $('<td>' + change + '</td>');
+    var $tdChangePercent = $('<td>' + changePercent + '</td>');
+    var $tdRemove = $('<td><button class="remove">Remove</button></td>');
+    $tr.append($tdName);
+    $tr.append($tdLastPrice);
+    $tr.append($tdQty);
+    $tr.append($tdChange);
+    $tr.append($tdChangePercent);
+    $tr.append($tdRemove);
 
-    stocks.push($ul);
-  
+    stocks.push($tr);
+
     return stocks;
 
   }//createList

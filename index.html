@@ -10,15 +10,21 @@
 	 <label for="quantity"> Qty </label>
 	 <input type="number" name="quantity" id="quantity"/>
 	 <button id="buy">Buy</button>
-  
+
 	 <h2>My Portfolio</h2>
-	 <ul>
-	 	<li>Company</li>
-	 	<li>Price</li>
-	 	<li>Quantity</li>
-	 	<li>Day Change</li>
-	 </ul>
-	 <div id="target"></div>
+	 <table><!--<ul>-->
+			<thead>
+				<tr>
+					<th>Company</th>
+					<th>Price</th>
+					<th>Quantity</th>
+					<th>Day Change</th>
+					<th>% Change</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody id="target"></tbody><!--append here-->
+	 </table>
 	 <div id="targetTotal"></div>
 
 
