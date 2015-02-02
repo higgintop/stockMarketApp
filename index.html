@@ -2,30 +2,33 @@
 <html>
 <head>
 	<title>Stock Market Portfolio</title>
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/5.5.0/css/foundation.min.css">
 	<link rel="stylesheet" href="main.css">
 </head>
 <body>
-	 <label for="symbol"> Symbol </label>
-	 <input type="text" name="symbol" id="symbol"/>
-	 <label for="quantity"> Qty </label>
-	 <input type="number" name="quantity" id="quantity"/>
-	 <button id="buy">Buy</button>
+	<div class="small-6 small-centered columns">
+		<label for="symbol"> Symbol </label>
+		<input type="text" name="symbol" id="symbol" placeholder="Enter Market Symbol"/>
+		<label for="quantity"> Quantity </label>
+		<input type="number" name="quantity" id="quantity" placeholder="Enter Amount to Purchase"/>
+		<button id="buy" class="button expand">Buy</button>
+	</div>
 
-	 <h2>My Portfolio</h2>
-	 <table><!--<ul>-->
-			<thead>
-				<tr>
-					<th>Company</th>
-					<th>Price</th>
-					<th>Quantity</th>
-					<th>Day Change</th>
-					<th>% Change</th>
-					<th>Action</th>
-				</tr>
-			</thead>
-			<tbody id="target"></tbody><!--append here-->
-	 </table>
-	 <div id="targetTotal"></div>
+	<div class="small-6 small-centered columns">
+		<div class="small-6 small-centered columns">
+			<h2>My Stock Portfolio</h2>
+		</div>
+		<div class="row">
+			<div class="small-2 columns heading">Company</div>
+			<div class="small-2 columns heading">Price</div>
+			<div class="small-2 columns heading">Quantity</div>
+			<div class="small-2 columns heading">Day Change</div>
+			<div class="small-2 columns heading">% Change</div>
+			<div class="small-2 columns heading">Action</div>
+		</div>
+		<div id="target"></div><!--append here-->
+	</div>
+	<div class="small-6 small-centered columns" id="targetTotal"></div>
 
 
 	<script src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
