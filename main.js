@@ -70,7 +70,7 @@
     var $divQty = $('<div class="small-2 columns qty">' + $qty + '</div>');
     var $divChange = $('<div class="small-2 columns">' + change + '</div>');
     var $divChangePercent = $('<div class="small-2 columns">' + changePercent + '</div>');
-    var $divRemove = $('<div class="small-2 columns"><button class="remove">Remove</button></div>');
+    var $divRemove = $('<div class="small-2 columns"><button class="alert remove">Remove</button></div>');
     $div.append($divName);
     $div.append($divLastPrice);
     $div.append($divQty);
