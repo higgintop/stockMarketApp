@@ -65,12 +65,12 @@
     var $div = $('<div class="row"></div>');
 
     //making the list items and appending to $ul
-    var $divName = $('<div class="small-2 columns">' + name + '</div>');
-    var $divLastPrice = $('<div class="small-2 columns price">' + lastPrice + '</div>');
-    var $divQty = $('<div class="small-2 columns qty">' + $qty + '</div>');
-    var $divChange = $('<div class="small-2 columns">' + change + '</div>');
-    var $divChangePercent = $('<div class="small-2 columns">' + changePercent + '</div>');
-    var $divRemove = $('<div class="small-2 columns"><button class="alert remove">Remove</button></div>');
+    var $divName = $('<div class="small-2 columns center">' + name + '</div>');
+    var $divLastPrice = $('<div class="small-2 columns price center">' + lastPrice + '</div>');
+    var $divQty = $('<div class="small-2 columns qty center">' + $qty + '</div>');
+    var $divChange = $('<div class="small-2 columns center">' + change + '</div>');
+    var $divChangePercent = $('<div class="small-2 columns center">' + changePercent + '</div>');
+    var $divRemove = $('<div class="small-2 columns center"><button class="alert remove">Remove</button></div>');
     $div.append($divName);
     $div.append($divLastPrice);
     $div.append($divQty);
