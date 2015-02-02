@@ -9,7 +9,24 @@
 
   $(function init() {
     $('#buy').on('click', buyStock);
+
+    $('#target').on('click', '.remove', removeStock);
   }); // init
+
+  function removeStock() {
+    var $listToRemove = $(this).parent().parent();
+
+    // get the price here
+    var price = $listToRemove.children(".price").text();
+    var qty = $listToRemove.children(".qty").text();
+    
+    total = total - (price * qty);
+    total = Math.round(total * 100)/100;
+
+    $('.total').text("Total: " + total);
+
+    $listToRemove.remove();  
+  }
 
   function buyStock () {
       var $symbol= $('#symbol').val().toUpperCase();
@@ -26,18 +43,6 @@
         $('#target').append(createList(res));
         $('#targetTotal').empty();
         $('#targetTotal').append(createTotal());
-
-        $('.remove').on('click', function(){
-          console.log("this on click = " + $('.remove').parent().parent());
-          var listToRemove = $('.remove').parent().parent();
-
-          // get the price here
-          var price = listToRemove.children(".price").val();
-          console.log("price = " + price);
-          // get qty here
-
-         //$(listToRemove).remove();
-        });
 
       }, 'jsonp'); // buyStock
 
@@ -80,7 +85,7 @@
   }//createList
 
   function createTotal(){
-    var h2Total = $('<h2>Total:' + total + '</h2>');
+    var h2Total = $('<h2 class="total">Total:' + total + '</h2>');
 
     return h2Total;
   }
