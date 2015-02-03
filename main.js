@@ -6,11 +6,15 @@
     var url;
     var $qty;
     var total = 0;
+    var urlFB = 'https://stockMarketApp.firebaseio.com/holdings.json';
 
   $.get('https://stockMarketApp.firebaseio.com/holdings.json', function(resFB){
     Object.keys(resFB).forEach(function(uuid){
       loadStock(uuid, resFB[uuid]);
     })
+    var $h2Total = $('<h2 class="total">Total: $' + total + '</h2>');
+    console.log("total in getFB: ", total);
+    $('#targetTotal').append($h2Total);
 
   });
 
@@ -56,7 +60,6 @@
         total = Math.round(total * 100)/100;
 
         var stock = { name: name, lastPrice: lastPrice, qty: $qty, change: change, changePercent: changePercent};
-        var urlFB = 'https://stockMarketApp.firebaseio.com/holdings.json';
         var data = JSON.stringify(stock);
         $.post(urlFB, data, function(res){
           console.log("post response: ", res);
@@ -80,7 +83,6 @@
     var $divChange = $('<div class="small-2 columns center">' + data.change + '</div>');
     var $divChangePercent = $('<div class="small-2 columns center">' + data.changePercent + '</div>');
     var $divRemove = $('<div class="small-2 columns center"><button class="alert remove">Remove</button></div>');
-    console.log(data.name);
     $div.append($divName);
     $div.append($divLastPrice);
     $div.append($divQty);
@@ -100,13 +102,9 @@
   function createTotal(data){
     total = total + (data.qty * data.lastPrice);
     total = (total * 100)/100;
-
-    //return total;
-
-    var $h2Total = $('<h2 class="total">Total: $' + total + '</h2>');
-    console.log("total: ", total);
-    $('#targetTotal').append($h2Total);
-
+    console.log("total in createTotal: ", total);
+    $('.total').text("Total: " + total);
+    return total;
   }
 
 })();
