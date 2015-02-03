@@ -44,10 +44,9 @@
         $('#targetTotal').empty();
         $('#targetTotal').append(createTotal());
 
-      }, 'jsonp'); // buyStock
+      }, 'jsonp'); // end of get
 
-  }
-
+  } // buy stock
 
   function createList(res){
     var name = res.Name;
@@ -57,8 +56,18 @@
     change = Math.round(change * 100)/100;
     var changePercent = res.ChangePercent;
     changePercent = Math.round(changePercent * 100)/100;
+
     total = total + (lastPrice * $qty);
     total = Math.round(total * 100)/100;
+
+    //POST name lastPrice change changePercent to the .json
+    var urlFB = 'https://stockMarketApp.firebaseio.com/holdings.json';
+    var data = JSON.stringify({ name: name, lastPrice: lastPrice, change: change, changePercent: changePercent});
+    $.post(urlFB, data, function(res){
+      console.log(res);
+      //set an attr on the tr ('data-uuid', res.name)
+      //append tr to the tbody
+    })
 
     var stocks = [];
 
@@ -89,8 +98,6 @@
 
     return h2Total;
   }
-
-
 
 
 })();
