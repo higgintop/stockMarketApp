@@ -56,18 +56,13 @@
         total = Math.round(total * 100)/100;
 
         var stock = { name: name, lastPrice: lastPrice, qty: $qty, change: change, changePercent: changePercent};
-        //POST name lastPrice change changePercent to the .json
         var urlFB = 'https://stockMarketApp.firebaseio.com/holdings.json';
         var data = JSON.stringify(stock);
         $.post(urlFB, data, function(res){
           console.log("post response: ", res);
           var uuid = res.name;
           loadStock(uuid, stock);
-          //set an attr on the tr ('data-uuid', res.name)
-          //append tr to the tbody
         });
-
-        // make the tr and append
 
       }, 'jsonp'); // end of get
 
@@ -96,18 +91,22 @@
     stocks.push($div);
 
     // return stocks;
-
     $('#target').append(stocks);
-    // $('#targetTotal').empty();
-    // $('#targetTotal').append(createTotal());
+    createTotal(data);
+
 
   }//loadStock
 
-  function createTotal(){
-    var h2Total = $('<h2 class="total">Total: $' + total + '</h2>');
+  function createTotal(data){
+    total = total + (data.qty * data.lastPrice);
+    total = (total * 100)/100;
 
-    return h2Total;
+    //return total;
+
+    var $h2Total = $('<h2 class="total">Total: $' + total + '</h2>');
+    console.log("total: ", total);
+    $('#targetTotal').append($h2Total);
+
   }
-
 
 })();
