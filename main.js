@@ -102,9 +102,9 @@
   function createTotal(data){
     total = total + (data.qty * data.lastPrice);
     total = (total * 100)/100;
-    console.log("total in createTotal: ", total);
-    $('.total').text("Total: " + total);
+    $('.total').text("Total from createTotal: " + total);
     return total;
   }
+
 
 })();
