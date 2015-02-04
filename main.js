@@ -8,6 +8,14 @@
     var total = 0;
     var urlFB = 'https://stockMarketApp.firebaseio.com/holdings.json';
 
+  $(function init() {
+    $('#buy').on('click', buyStock);
+
+    $('#target').on('click', '.remove', removeStock);
+
+    loadPage();
+  }); // init
+
   function loadPage(){
     $.get('https://stockMarketApp.firebaseio.com/holdings.json', function(resFB){
       Object.keys(resFB).forEach(function(uuid){
@@ -18,27 +26,25 @@
     });
   }
 
-  loadPage();
+  function removeStock(evt) {
+    var $divToRemove = $(evt.target).parent().parent();//this is a jquery or html element
+    var uuid = $divToRemove.data('uuid');
 
-  $(function init() {
-    $('#buy').on('click', buyStock);
+    var urlItem = 'https://stockMarketApp.firebaseio.com/holdings/' + uuid + '.json';
+    $.ajax(urlItem, {type: 'DELETE'});
+    $('#target').empty();
+    loadPage();
 
-    $('#target').on('click', '.remove', removeStock);
-  }); // init
-
-  function removeStock() {
-    var $listToRemove = $(this).parent().parent();
-
-    // get the price here
-    var price = $listToRemove.children(".price").text();
-    var qty = $listToRemove.children(".qty").text();
-
-    total = total - (price * qty);
-    total = Math.round(total * 100)/100;
-
-    $('.total').text("Total: " + total);
-
-    $listToRemove.remove();
+    // // get the price here
+    // var price = $divToRemove.children(".price").text();
+    // var qty = $divToRemove.children(".qty").text();
+    //
+    // total = total - (price * qty);
+    // total = Math.round(total * 100)/100;
+    //
+    // $('.total').text("Total: $" + total);
+    //
+    // $divToRemove.remove();
   }
 
   function buyStock () {
@@ -88,13 +94,12 @@
     $div.append($divChange);
     $div.append($divChangePercent);
     $div.append($divRemove);
+    $div.attr('data-uuid', uuid);
 
     stocks.push($div);
 
     // return stocks;
     $('#target').append(stocks);
-    // createTotal(data);
-
 
   }//loadStock
 
@@ -103,7 +108,7 @@
     stockTotal = Math.round(stockTotal * 100)/100;
     total += stockTotal;
     total = Math.round(total * 100)/100;
-    $('.total').text("Total: " + total);
+    $('.total').text("Total: $" + total);
     return total;
   }
 
