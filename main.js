@@ -8,15 +8,17 @@
     var total = 0;
     var urlFB = 'https://stockMarketApp.firebaseio.com/holdings.json';
 
-  $.get('https://stockMarketApp.firebaseio.com/holdings.json', function(resFB){
-    Object.keys(resFB).forEach(function(uuid){
-      loadStock(uuid, resFB[uuid]);
-    })
-    var $h2Total = $('<h2 class="total">Total: $' + total + '</h2>');
-    console.log("total in getFB: ", total);
-    $('#targetTotal').append($h2Total);
+  function loadPage(){
+    $.get('https://stockMarketApp.firebaseio.com/holdings.json', function(resFB){
+      Object.keys(resFB).forEach(function(uuid){
+        loadStock(uuid, resFB[uuid]);
+        createTotal(resFB[uuid]);
+      })
 
-  });
+    });
+  }
+
+  loadPage();
 
   $(function init() {
     $('#buy').on('click', buyStock);
@@ -56,15 +58,12 @@
         var changePercent = res.ChangePercent;
         changePercent = Math.round(changePercent * 100)/100;
 
-        total = total + (lastPrice * $qty);
-        total = Math.round(total * 100)/100;
-
         var stock = { name: name, lastPrice: lastPrice, qty: $qty, change: change, changePercent: changePercent};
         var data = JSON.stringify(stock);
         $.post(urlFB, data, function(res){
-          console.log("post response: ", res);
-          var uuid = res.name;
-          loadStock(uuid, stock);
+          total = 0;
+          $('#target').empty();
+          loadPage();
         });
 
       }, 'jsonp'); // end of get
@@ -94,15 +93,17 @@
 
     // return stocks;
     $('#target').append(stocks);
-    createTotal(data);
+    // createTotal(data);
 
 
   }//loadStock
 
   function createTotal(data){
-    total = total + (data.qty * data.lastPrice);
-    total = (total * 100)/100;
-    $('.total').text("Total from createTotal: " + total);
+    var stockTotal = data.qty * data.lastPrice;
+    stockTotal = Math.round(stockTotal * 100)/100;
+    total += stockTotal;
+    total = Math.round(total * 100)/100;
+    $('.total').text("Total: " + total);
     return total;
   }
 
